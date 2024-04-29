@@ -1,4 +1,4 @@
-import Markdown, { SyntaxHighlighter } from 'react-markdown'
+import Markdown from 'react-markdown'
 import { FC } from 'react'
 import classes from './post-content.module.css'
 import PostHeader from './post-header'

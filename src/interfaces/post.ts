@@ -8,4 +8,6 @@ export interface PostContentI {
   data: { [key: string]: any }
   content: string
   slug: string
+  image: string
+  title: string
 }
