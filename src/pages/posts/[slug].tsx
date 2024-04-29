@@ -27,7 +27,7 @@ export function getStaticPaths() {
   const postFileNames = getPostFiles()
 
   const slugs = postFileNames.map(fileName => fileName.replace(/\.md$/, ''))
-  console.log('Static paths:', slugs)
+
   return {
     paths: slugs.map(slug => ({ params: { slug: slug } })),
     fallback: false
