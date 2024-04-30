@@ -1,9 +1,12 @@
 import Markdown from 'react-markdown'
 import { FC } from 'react'
-import classes from './post-content.module.css'
+import Image from 'next/image'
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
+import { atomDark } from 'react-syntax-highlighter/dist/cjs/styles/prism'
+
 import PostHeader from './post-header'
 import { PostContentI } from '~/interfaces/post'
-import Image from 'next/image'
+import classes from './post-content.module.css'
 
 type Props = {
   post: PostContentI
@@ -38,6 +41,15 @@ const PostContent: FC<Props> = props => {
         )
       }
       return <p>{paragraph.children}</p>
+    },
+    code(code: any) {
+      const { className, node, children, ...rest } = code
+      const match = /language-(\w+)/.exec(className || '') || ''
+      return (
+        <SyntaxHighlighter {...rest} style={atomDark} PreTag="div" language={match[1]}>
+          {String(children).replace(/\n$/, '')}
+        </SyntaxHighlighter>
+      )
     }
   }
 
