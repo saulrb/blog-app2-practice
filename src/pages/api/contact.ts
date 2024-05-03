@@ -1,9 +1,11 @@
-const handler = (req, res) => {
+import { dbConnect, insertDocument, getDocuments } from '~/lib/db-utils'
+
+const handler = async (req, res) => {
   if (req.method === 'POST') {
     const { email, name, message } = req.body
     if (
       !email ||
-      email.includes('@') ||
+      !email.includes('@') ||
       !name ||
       name.trim() === '' ||
       !message ||
@@ -18,9 +20,22 @@ const handler = (req, res) => {
       name,
       message
     }
-
-    console.log(newMessage)
-    res.status(201).json({ message: 'Successfully stored message!' })
+    let client = null
+    let insertResult = null
+    try {
+      client = await dbConnect()
+    } catch (error: any) {
+      res.status(500).json({ message: 'Connecting to the database failed' })
+      return
+    }
+    try {
+      insertResult = await insertDocument(client, 'contacts', newMessage)
+      client.close()
+    } catch (error: any) {
+      res.status(500).json({ message: error.message || 'Inserting data failed' })
+      return
+    }
+    res.status(201).json({ contact: insertResult })
   }
 }
 
