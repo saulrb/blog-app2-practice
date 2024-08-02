@@ -1,6 +1,6 @@
 import { dbConnect, insertDocument, getDocuments } from '~/lib/db-utils'
 
-const handler = async (req, res) => {
+const handler = async (req: any, res: any) => {
   if (req.method === 'POST') {
     const { email, name, message } = req.body
     if (

@@ -14,7 +14,7 @@ const Home: FC<Props> = props => {
   return (
     <Fragment>
       <Head>
-        <title>Saul's Blog</title>
+        <title>Saul&apos;s Blog</title>
       </Head>
       <Hero />
       <FeaturedPosts posts={featuredPosts} />

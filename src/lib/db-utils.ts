@@ -1,7 +1,7 @@
 import { Collection, MongoClient } from 'mongodb'
 
 export const dbConnect = async () => {
-  const url = 'mongodb://localhost:27017'
+  const url = process.env.mongodb_cluster_url || ''
   const client = new MongoClient(url)
   return await client.connect()
 }

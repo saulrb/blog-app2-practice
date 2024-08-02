@@ -19,14 +19,14 @@ const sendContactData = async (contactDetails: any) => {
 }
 
 const ContactForm: FC = () => {
-  const [requestStatus, setRequestStatus] = useState(null) // pending success or error
-  const [requestError, setRequestError] = useState(null)
+  const [requestStatus, setRequestStatus] = useState('') // pending success or error
+  const [requestError, setRequestError] = useState('')
 
   useEffect(() => {
     if (requestStatus === 'error' || requestStatus === 'success') {
       const timer = setTimeout(() => {
-        setRequestStatus(null)
-        setRequestError(null)
+        setRequestStatus('')
+        setRequestError('')
       }, 3000)
       return () => clearTimeout(timer)
     }
